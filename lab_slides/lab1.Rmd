@@ -1,0 +1,78 @@
+---
+title: "Bayesian Models"
+author: "Wiktor Soral"
+date: "October 2, 2017"
+output: 
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Lab 1 | Introduction
+
+## About me
+
+- Wiktor Soral, PhD
+- social psychologist
+- Email: <a href="mailto:wiktor.soral@gmail.com">wiktor.soral@gmail.com</a>
+- Course website:
+- Office hours (room 300): Monday 12:00-14:00, Thursday 11:00-13:00
+- Or by appointment
+
+## About the course
+
+<div class="columns-2">
+- (mostly self-contained) course of the basics of Bayesian methods
+- focused on practical aspects of implementation (with R)
+- lab format with (mostly) real-world psychological examples
+- based (to great extent) on the book by John Kruschke "Doing Bayesian Data Analysis"
+
+<div class="centered">
+![Puppies book](kruschke.jpg)
+</div>
+
+</div>
+
+## About the course
+
+- Students are allowed to miss 2 classes without excuse, 2 more classes in case of excuse, but will not pass the course in case of more than 4 absences.
+
+- Assessment methods: <b>home assignments</b> (30%), <b>midterm exam</b> (30%), <b>final exam</b> (40%)
+
+- Grading scale: 
+95%+ = 5! 
+90-94% = 5 
+80-89% = 4.5 
+70-79% = 4
+60-69% = 3.5 
+50-59% 59% = 3 
+below 50% = 2 (fail)
+
+
+## Replication crisis, problems with NHST
+
+- Wiktor Soral, PhD
+- social psychologist
+
+## Why Bayesian statistics?
+
+- Wiktor Soral, PhD
+- social psychologist
+
+## Bayesian vs. frequentist (classic) approach
+
+- Wiktor Soral, PhD
+- social psychologist
+
+## Probability - short recap
+
+- Wiktor Soral, PhD
+- social psychologist
+
+## Bayes theorem
+
+- Wiktor Soral, PhD
+- social psychologist
+
