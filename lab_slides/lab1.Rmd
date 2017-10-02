@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - Wiktor Soral, PhD
 - social psychologist
 - Email: <a href="mailto:wiktor.soral@gmail.com">wiktor.soral@gmail.com</a>
-- Course website:
+- Course website: <a href=https://github.com/wsoral/bayesian_models>https://github.com/wsoral/bayesian_models</a>
 - Office hours (room 300): Monday 12:00-14:00, Thursday 11:00-13:00
 - Or by appointment
 
