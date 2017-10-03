@@ -1,5 +1,20 @@
 # Bayesian Models in Psychology
 
+## About the website
+
+Here you will find lab slides and handouts, R notebooks, datasets, **homeworks**,
+and other useful resources for the course Bayesian Models in Psychology.
+
+You can view and download the resources from this website, or you can start using Git and sync the content of this repository with a folder on your PC or laptop within a few seconds.
+
+You can learn how to install Git from [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). After successful installation just clone this repository
+
+git clone https://github.com/wsoral/bayesian_models
+
+During this semester changes will be made to this repository and new content will be added (e.g. new assignments). You can just pull these changes, by simply going to the folder on your PC and:
+
+git pull
+
 ## About me
 
 - Wiktor Soral, PhD
@@ -21,7 +36,7 @@
 ![Puppies book](lab_slides/kruschke.jpg?raw=true "Kruschke")
 
 
-## About the course
+## About assessment and grading criteria
 
 - Students are allowed to miss 2 classes without excuse, 2 more classes in case of excuse, but will not pass the course in case of more than 4 absences.
 
