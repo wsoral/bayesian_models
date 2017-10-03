@@ -20,7 +20,7 @@ Suppose when we rolled the die 100 times we found these results: #1’s = 48, #2
 
 Please describe and justify.
 
-- Do the following exercise after reading chapter 5 (takien from the handbook):
+- Do the following exercise after reading chapter 5 (taken from the handbook):
 
 Consider again the exercise from lab 1 on dating a new person. Suppose now that person may agree or disagree on a date, depending on 1 of 3 situations: s/he is in a relationship, s/he is not in relationship, or *it's complicated*:
 
