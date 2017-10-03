@@ -47,6 +47,7 @@ git pull
 - Assessment methods: <b>home assignments</b> (30%), <b>midterm exam</b> (30%), <b>final exam</b> (40%)
 
 - Grading scale:
+
 | Grade  |  5!    |   5      |    4.5   |    4     |   3.5    |   3      | 2 (fail)  |
 |:------:|:------:|:--------:|:--------:|:--------:|:--------:|:--------:|:---------:|
 | Points | *95%+* | *90-94%* | *80-89%* | *70-79%* | *60-69%* | *50-59%* |*below 50%*|
