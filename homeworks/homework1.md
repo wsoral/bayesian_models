@@ -1,6 +1,6 @@
 # Homework 1 - introduction to probability and Bayes theorem
 
-- Read chapter 2 and 5 from DBDA by Kruschke.
+- Read chapters 2 and 5 from DBDA by Kruschke.
 - Do the following exercises after reading chapter 2 (takien from the handbook):
 
 **a)** Suppose we have a four-sided die from a board game. On
