@@ -1,7 +1,7 @@
 # Homework 1 - introduction to probability and Bayes theorem
 
 - Read chapters 2 and 5 from DBDA by Kruschke.
-- Do the following exercises after reading chapter 2 (takien from the handbook):
+- Do the following exercises after reading chapter 2 (taken from the handbook):
 
 **a)** Suppose we have a four-sided die from a board game. On
 a tetrahedral die, each face is an equilateral triangle. When you roll the die, it lands with one face down and the other three faces visible as a three-sided pyramid. The faces are numbered 1-4, with the value of the bottom face printed (as clustered dots) at the bottom edges of all three visible faces. Denote the value of the bottom face as x. Consider the following three mathematical descriptions of the probabilities of x. Model A: p(x) = 1/4. Model B: p(x) = x/10. Model C: p(x) = 12/(25x). For each model, determine the
