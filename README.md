@@ -17,9 +17,9 @@
 - lab format with (mostly) real-world psychological examples
 - based (to great extent) on the book by John Kruschke "Doing Bayesian Data Analysis"
 
-<div class="centered">
+
 ![Puppies book](lab_slides/kruschke.jpg)
-</div>
+
 
 
 ## About the course
