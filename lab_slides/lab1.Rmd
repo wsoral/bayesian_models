@@ -2,7 +2,7 @@
 title: "Bayesian Models in Psychology"
 author: "Wiktor Soral"
 date: "October 2, 2017"
-output: 
+output:
   ioslides_presentation
 ---
 
@@ -41,11 +41,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 - Students are allowed to miss 2 classes without excuse, 2 more classes in case of excuse, but will not pass the course in case of more than 4 absences.
 
-- Assessment methods: **home assignments** (30%), **midterm exam** (30%), **final exam* *(40%)
+- Assessment methods: **home assignments** (30%), **midterm exam** (30%), **final exam** (40%)
 
 - Exams will be based on the selected chapters from the handbook and lab exercises
 
-- Grading: 
+- Grading:
 
 | Grade  |  5!    |   5      |    4.5   |    4     |   3.5    |   3      | 2 (fail)  |
 |:------:|:------:|:--------:|:--------:|:--------:|:--------:|:--------:|:---------:|
@@ -69,7 +69,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 - How should we set up the threshold for *p-value* (p < .10, p < .05, p < .01, or p < .001)?
 - With *p-value* we cannot prove that there is no difference, or that the correlation is negligible.
-- Suppose you conducted 4 studies and each time you obtained some interesting effect. However, you failed to reject null hypothesis in Study 5. What should you do? 
+- Suppose you conducted 4 studies and each time you obtained some interesting effect. However, you failed to reject null hypothesis in Study 5. What should you do?
 
 ## Why Bayesian statistics? 1
 
@@ -168,6 +168,3 @@ ggplot(df, aes(theta, ..scaled..)) +
 - Bayes theorem is a simple result that allows us to invert conditional probabilities, e.g. computing $P(SD = x | faculty = y)$ from $P(faculty = y | SD = x)$ without knowing a joint probability
 
 - $P(faculty = y | SD = x) = \frac{P(SD = x | faculty = y) \times P(faculty = y)}{P(SD = x)}$
-
-
-
