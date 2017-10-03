@@ -1,5 +1,5 @@
 ---
-title: "Bayesian Models"
+title: "Bayesian Models in Psychology"
 author: "Wiktor Soral"
 date: "October 2, 2017"
 output: 
@@ -31,48 +31,143 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <div class="centered">
 ![Puppies book](kruschke.jpg)
+
 </div>
 
 </div>
 
 ## About the course
 
+
 - Students are allowed to miss 2 classes without excuse, 2 more classes in case of excuse, but will not pass the course in case of more than 4 absences.
 
-- Assessment methods: <b>home assignments</b> (30%), <b>midterm exam</b> (30%), <b>final exam</b> (40%)
+- Assessment methods: **home assignments** (30%), **midterm exam** (30%), **final exam* *(40%)
 
-- Grading scale: 
-95%+ = 5! 
-90-94% = 5 
-80-89% = 4.5 
-70-79% = 4
-60-69% = 3.5 
-50-59% 59% = 3 
-below 50% = 2 (fail)
+- Exams will be based on the selected chapters from the handbook and lab exercises
+
+- Grading: 
+
+| Grade  |  5!    |   5      |    4.5   |    4     |   3.5    |   3      | 2 (fail)  |
+|:------:|:------:|:--------:|:--------:|:--------:|:--------:|:--------:|:---------:|
+| Points | *95%+* | *90-94%* | *80-89%* | *70-79%* | *60-69%* | *50-59%* |*below 50%*|
 
 
-## Replication crisis, problems with NHST
+## Replication crisis in psychology
 
-- Wiktor Soral, PhD
-- social psychologist
+- Only one third to one half of published psychological effects replicate: <a href=http://science.sciencemag.org/content/349/6251/aac4716>http://science.sciencemag.org/content/349/6251/aac4716</a>
+- Infamous frauds in the field of social psychology: <a href=http://www.apa.org/science/about/psa/2011/12/diederik-stapel.aspx>http://www.apa.org/science/about/psa/2011/12/diederik-stapel.aspx</a>
+- BASP bans p-values: <a href=http://www.nature.com/news/psychology-journal-bans-p-values-1.17001>http://www.nature.com/news/psychology-journal-bans-p-values-1.17001</a>
 
-## Why Bayesian statistics?
+## Problems with Null Hypothesis Significance Testing (NHST) 1
 
-- Wiktor Soral, PhD
-- social psychologist
+- In NHST we claim to obtain significant effect if we obtain a *p-value* less than some threshold - usually .05
+- What this *p-value* means?
+- *P-value* should not be treated as a direct measure of evidence for our hypothesis
+- We should rather use effect size value, e.g. Cohen's d. However it is not very intuitive.
 
-## Bayesian vs. frequentist (classic) approach
+## Problems with Null Hypothesis Significance Testing (NHST) 2
 
-- Wiktor Soral, PhD
-- social psychologist
+- How should we set up the threshold for *p-value* (p < .10, p < .05, p < .01, or p < .001)?
+- With *p-value* we cannot prove that there is no difference, or that the correlation is negligible.
+- Suppose you conducted 4 studies and each time you obtained some interesting effect. However, you failed to reject null hypothesis in Study 5. What should you do? 
 
-## Probability - short recap
+## Why Bayesian statistics? 1
 
-- Wiktor Soral, PhD
-- social psychologist
+- Bayesian approach (BA) offers an alternative to classical approach
+- BA allows to quantify degrees of uncertainty about every possible aspect of data analysis
+- BA views probability in a subjective manner - *Bayesian p-value* can be interpreted as measure of confidence in some hypothesis
+- BA does not constrain hypothesis testing to rejecting null hypothesis - it can be used to quantify evidence for no effect
+
+## Why Bayesian statistics? 2
+
+- BA allows to incorporate previous knowledge (e.g. from previous studies) in the process of hypothesis testing
+- BA allows to deal quite easily with complex modeling tasks, and violated assumptions
+- BA requires smaller sample sizes than classical approach
+- BA is better in making predictions, and can advance us in the process of decision making
+
+## Bayesian vs. frequentist approach | Interpretation of probability
+
+- *Frequentist* - observed result from infinite series of trials performed or imagined under identical conditions
+
+- *What is the probability that Poland will win the nearest FIFA World Cup?*
+
+- *Bayesian* - probability is the researcher "degree of belief" before or after the data are observed
+
+## Bayesian vs. frequentist approach | What is fixed and variable?
+
+- *Frequentist* - data are iid random sample from continuous stream. Parameters are fixed by nature
+
+- *Bayesian* - data are observed and so fixed by the sample generated. Parameters are unknown and described distributionally
+
+
+## Bayesian vs. frequentist approach | What is fixed and variable?
+
+```{r}
+library(ggplot2)
+df <- data.frame(theta = 100*rbeta(1000, 5.2, 2))
+ggplot(df, aes(theta, ..scaled..)) +
+  geom_density(fill='lightblue', alpha=0.4) +
+  geom_vline(xintercept = 72, size=2, colour='red') +
+  theme_classic() +
+  labs(x=expression(theta), y='Probability') +
+  theme(axis.title.x = element_text(size=16))
+```
+
+
+## Probability - brief, informal and intuitive recap
+
+- Suppose we are interested in sleeping disorder (SD) among undergraduate students
+- We ask a sample of students and find 8 undergrads who report SD, and 12 who don't report SD
+- A ratio of undergrads with SD to undergrads without SD is then $\frac{8}{12} \approx 0.667$ - we called it odds
+- Probability of $P(SD) = \frac{odds}{1+odds} = \frac{0.667}{1+0.667} \approx 0.40$
+
+## Probability - recap
+
+|           |  SD    |  no SD | *Total*  |
+|:---------:|:------:|:------:|:--------:|
+|Psychology |   4    |  6     |  *10*    |
+|Journalism |   2    |  8     |  *10*    |
+| *Total*   |   *8*  |*12*    |  *20*    |
+
+
+## Probability - recap
+
+|           |  SD    |  no SD | *Total*  |
+|:---------:|:------:|:------:|:--------:|
+|Psychology |   0.2  |  0.3   |  *0.5*   |
+|Journalism |   0.1  |  0.4   |  *0.5*   |
+| *Total*   |  *0.4* | *0.6*  |  *1.0*   |
+
+- We call $P(SD = x)$ and $P(faculty = y)$ marginal probability
+- We call $P(SD = x\ and\ faculty = y)$ joint probability
+- Recall that if $P(SD = x) \times P(faculty = y) = P(SD = x\ and\ faculty = y)$ for every value of $x$ and $y$, the two variables are independent.
+- Otherwise they are conditionally dependent
+
+## Probability - recap
+
+|           |  SD    |  no SD | *Total*  |
+|:---------:|:------:|:------:|:--------:|
+|Psychology |   0.2  |  0.3   |  *0.5*   |
+|Journalism |   0.1  |  0.4   |  *0.5*   |
+| *Total*   |  *0.4* | *0.6*  |  *1.0*   |
+
+- We call $P(SD = x | faculty = y)$ conditional probability
+- $P(SD = x | faculty = y) = \frac{P(SD = x\ and\ faculty = y)}{P(faculty = y)}$
+- $P(faculty = y | SD = x) = \frac{P(SD = x\ and\ faculty = y)}{P(SD = x)}$
+- What is a conditional probability of SD for psychology undergrads?
+- What is a conditional probability of SD for journalism undergrads?
 
 ## Bayes theorem
 
-- Wiktor Soral, PhD
-- social psychologist
+|           |  SD    |  no SD | *Total*  |
+|:---------:|:------:|:------:|:--------:|
+|Psychology |   0.2  |  0.3   |  *0.5*   |
+|Journalism |   0.1  |  0.4   |  *0.5*   |
+| *Total*   |  *0.4* | *0.6*  |  *1.0*   |
+
+- Bayes theorem is a simple result that allows us to invert conditional probabilities, e.g. computing $P(SD = x | faculty = y)$ from $P(faculty = y | SD = x)$ without knowing a joint probability
+
+- $P(faculty = y | SD = x) = \frac{P(SD = x | faculty = y) \times P(faculty = y)}{P(SD = x)}$
+
+
 
