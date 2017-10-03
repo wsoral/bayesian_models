@@ -9,11 +9,15 @@ You can view and download the resources from this website, or you can start usin
 
 You can learn how to install Git from [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). After successful installation just clone this repository
 
+```bash
 git clone https://github.com/wsoral/bayesian_models
+```
 
 During this semester changes will be made to this repository and new content will be added (e.g. new assignments). You can just pull these changes, by simply going to the folder on your PC and:
 
+```bash
 git pull
+```
 
 ## About me
 
