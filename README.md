@@ -18,7 +18,7 @@
 - based (to great extent) on the book by John Kruschke "Doing Bayesian Data Analysis"
 
 
-![Puppies book](lab_slides/kruschke.jpg)
+![Puppies book](https://github.com/wsoral/bayesian_models/blob/master/lab_slides/kruschke.jpg)
 
 
 
