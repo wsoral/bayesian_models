@@ -146,5 +146,5 @@ values
 # We can also use formulas to find mean and variance of posterior distribution
 
 (m_beta = (a+s)/((a+s) + (b+f)))
-(v_beta = m*(1-m)/((a+s)+(b+f)+1))
+(v_beta = m_beta*(1-m_beta)/((a+s)+(b+f)+1))
 (sd_beta = sqrt(v_beta))
