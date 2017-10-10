@@ -1,0 +1,212 @@
+---
+title: "Bayesian Models in Psychology"
+author: "Wiktor Soral"
+date: "October 10, 2017"
+output:
+  ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Lab 2 | Binomial Models
+
+## Bayesian updating {.flexbox .vcenter}
+
+<div class="centered" style="font-size: 150%;>
+
+Bayes theorem
+
+$P(B | A) = \frac{P(A | B) \times P(B)}{P(A)}$
+
+</div>
+
+## Bayesian updating {.flexbox .vcenter}
+
+<div style="font-size: 150%;>
+
+$P(\theta | \mathcal{D}) = \frac{P(\mathcal{D}|\theta) \times P(\theta)}{P(\mathcal{D})}$
+
+</div>
+
+- $\mathcal{D}$ - data, i.e. results of an experiment or observation, fixed
+- $\theta$ - parameters responsible for generating data, random
+
+## Example 1
+
+- When tossing a coin we have some beliefs about the frequencies of heads and tails - $\theta$. If we believe that the coin is fair, we expect that $P(heads) = P(tails) = 1/2$ . When actually tossing a coin (suppose 10 times) we are obtaining some proportion of heads and tails, say 6 to 4 - $\mathcal{D}$.
+
+## Example 2
+
+- Before conducting a study on sleeping disorders (SD), we may have some beliefs about the frequency of SD. Say we believe that it is present among 25% percent of undergraduate students - $\theta$. After conducting the study on N = 100 undergraduates, we observe SD among 40 of undergraduates - $\mathcal{D}$
+
+## Example 3
+
+- It is well known that IQ has a mean, $\mu = 100$ and standard deviation, $\sigma = 15$ - we can jointly name these two values as $\theta$. We can expect these values in a random sample. However, after conducting a sample of school students we observe mean, m = 97, and standard deviation, SD = 20 - $\mathcal{D}$
+
+## Bayesian updating {.flexbox .vcenter}
+
+<div style="font-size: 150%;>
+
+$P(\theta | \mathcal{D}) = \frac{P(\mathcal{D}|\theta) \times P(\theta)}{P(\mathcal{D})}$
+
+</div>
+
+- $\mathcal{D}$ - data, i.e. results of an experiment or observation, fixed
+- $\theta$ - parameters responsible for generating data, random
+
+## Bayesian updating {.flexbox .vcenter}
+
+<div style="font-size: 150%;>
+
+$P(\theta | \mathcal{D}) \propto P(\mathcal{D}|\theta) \times P(\theta)$
+
+<span class="red2">posterior</span> = <span class="blue2">likelihood</span> $\times$ <span class="green2">prior</span>
+</div>
+
+
+Each new observation changes our beliefs about parameters responsible for generating data.
+
+## Prior $\times$ likelihood = posterior
+
+- <span class="green2">Prior</span> - beliefs about about a state of the world **before** conducting a study
+- <span class="red2">Posterior</span> - beliefs about a state of the world **after** conducting a study
+- <span class="blue2">Likelihood</span> - description of how certain quantities/qualities manifest in obervations; expected results given a certain value of parameter(s)
+
+## Prior - degree of belief
+
+- <span class="green2">Prior</span> - degree of belief in parameter values
+- Parameters values rarely take form of dichotomous or polytomous states, e.g. yes or no
+- Parameters can also take discrete form, e.g. 4, 5, 6
+- And frequently continuous form, e.g. 2.3242, 6.6875, 5.6789
+
+- To assign degree of beliefs to different parameter values we use some distribution (e.g. Normal, Student t, F, $\chi^2$)
+
+## Binomial likelihood
+
+
+```{r}
+suppressWarnings(curve(dbinom(x,10, prob = 0.5), from = 0, to=10, type='h', lwd=2, xlab='Possible results',
+                 ylab='Probability of occuring', main='Likelihood given p = 0.5'))
+```
+
+## Binomial likelihood
+
+
+```{r}
+suppressWarnings(curve(dbinom(x,10, prob = 0.2), from = 0, to=10, type='h', lwd=2, xlab='Possible results',
+                 ylab='Probability of occuring', main='Likelihood given p = 0.2'))
+```
+
+
+## Binomial likelihood
+
+```{r}
+suppressWarnings(curve(dbinom(x,10, prob = 0.8), from = 0, to=10, type='h', lwd=2, xlab='Possible results',
+                 ylab='Probability of occuring', main='Likelihood given p = 0.8'))
+```
+
+
+## Binomial likelihood {.flexbox .vcenter}
+
+$L(p | S,F) \propto p^S \times (1-p)^F, 0 < p < 1$
+
+- p - probability (parameter)
+- S - number of successes or positive observations (data)
+- F - number of failures or negative observations (data)
+
+
+## Working with beta distribution
+
+- Assigning degree of beliefs to parameter values can be very tedious, and with continuous parameters almost impossible
+- We usually describe uncertainty associated with parameters by using some existing well known distribution
+- When working with parameters reflecting proportion (i.e. taking values from 0 to 1), we usually use **beta distribution**
+
+## Working with beta distribution {.flexbox .vcenter}
+
+$\pi(p) \propto p^{a-1} \times (1-p)^{b-1}, 0 < p < 1$
+
+- p - probability (parameter)
+- a and b - hyperparameters reflecting the users prior beliefs about p
+- mean of beta distribution is m = a/(a + b)
+- variance of beta distribution is v = m(1-m)/(a+b+1)
+
+
+## Working with beta distribution
+
+```{r}
+curve(dbeta(x, 0.5, 0.5), from=0, to=1, main='Beta distribution (a = 0.5, b = 0.5)', xlab='proportion', ylab='')
+```
+
+## Working with beta distribution
+
+```{r}
+curve(dbeta(x, 5, 1), from=0, to=1, main='Beta distribution (a = 5, b = 1)', xlab='proportion', ylab='')
+```
+
+## Working with beta distribution
+
+```{r}
+curve(dbeta(x, 1, 3), from=0, to=1, main='Beta distribution (a = 1, b = 3)', xlab='proportion', ylab='')
+```
+
+
+
+## Working with beta distribution
+
+```{r}
+curve(dbeta(x, 2, 2), from=0, to=1, main='Beta distribution (a = 2, b = 2)', xlab='proportion', ylab='')
+```
+
+
+## Working with beta distribution
+
+```{r}
+curve(dbeta(x, 2, 5), from=0, to=1, main='Beta distribution (a = 2, b = 5)', xlab='proportion', ylab='')
+```
+
+
+## Beta-binomial model
+
+- Note how similar are formulas for binomial and beta distributions (up to a constant)
+
+<span class="blue2">Binomial likelihood</span>
+
+$L(p | S, F) \propto p^S \times (1-p)^F, 0 < p < 1$
+
+<span class="green2">Beta prior</span>
+
+$\pi(p) \propto p^{a-1} \times (1-p)^{b-1}, 0 < p < 1$
+
+
+## Beta-binomial model
+
+- Note how similar are formulas for binomial and beta distributions (up to a constant)
+
+<span class="blue2">Binomial likelihood</span>
+
+$L(p | S,F) \propto p^S \times (1-p)^F, 0 < p < 1$
+
+<span class="green2">Beta prior</span>
+
+$\pi(p) \propto p^{a-1} \times (1-p)^{b-1}, 0 < p < 1$
+
+<span class="red2">Beta posterior</span>
+
+$L(p) \times \pi(p) = p^{(a+S)-1} \times (1-p)^{(b+F)-1}$
+
+
+## Beta binomial model
+
+```{r}
+a = 3.26
+b = 7.19
+s = 11
+f = 16
+curve(dbeta(x, a+s, b+f), from=0, to=1, xlab='p', ylab='Density', lty=1, lwd=4, col='red2')
+curve(dbeta(x, s+1, f+1), add=TRUE, lty=2, lwd=4, col='blue2')
+curve(dbeta(x, a, b), add=TRUE,  lty=3, lwd=4, col='green2')
+legend(.7, 4, c('Prior', 'Likelihood', 'Posterior'), lty=c(3,2,1), lwd=c(3,3,3), col=c('green2','blue2','red2'))
+```
+
