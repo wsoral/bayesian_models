@@ -1,4 +1,4 @@
-# Homework 2 - infering binomial probability
+# Homework 2 - inferring binomial probability
 
 - Read chapters 4 and 6 from DBDA by Kruschke. Chapter 6 is crucial for doing this assignment. Chapter 4 will increase your understanding of probability distributions.
 - This assingment is just a consolidation of exercises that we did during lab 2. 
