@@ -9,6 +9,7 @@
 - Plot both prior and posterior probabilities (lines 85-95 in case of manually assigned priors or lines 133-136 in case of using beta priors) and describe how your beliefs were changed by collecting data.
 
 R hints 1: Don't panic. You can easily do this assignment without any R knowledge. Just read the comment in the lab2.R file and recall steps taken during last lab. Do one step at a time, run the code and see if it works. If not go back, check syntax, and retry. If you encounter any error, it is probably caused by some mispelled commands.
+
 R hints 2: When plotting your results you can change axis labels and plot title by changing values of xlab, ylab, and main parameters.
-R hints 3: When you plot your results in RStudio you can easily save your plot by clicking 'Export' at the top of the plotting window. Then
-you can save your plot as pdf, as an image (png, jpeg, etc.), or just copy the plot to clipboard and then paste it into your word processor.
+
+R hints 3: When you plot your results in RStudio you can easily save your plot by clicking 'Export' at the top of the plotting window. Then you can save your plot as pdf, as an image (png, jpeg, etc.), or just copy the plot to clipboard and then paste it into your word processor.
