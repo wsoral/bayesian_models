@@ -1,4 +1,4 @@
-# Homework 2 - eliciting Normal prior
+# Homework 3 - eliciting Normal prior
 
 - Read the short section from Jeff Gill book "Bayesian Methods" (you can find it in this folder).
 - You can do the rest of this assignment in groups of 2 or 3 people.
