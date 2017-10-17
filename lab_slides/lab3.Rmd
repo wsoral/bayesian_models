@@ -1,0 +1,118 @@
+---
+title: "Lab 3"
+author: "Wiktor Soral"
+date: "October 16th 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Normal Model
+
+## Why Be Normal?
+
+- often the posterior is known to be unimodal and symmetric
+- we can effectively model it with a normal distribution even if we know that the form is only nearly normal
+- in cases where the researcher has a rough idea of where an unknown parameter is centered, the normal provides a useful way of modeling this guess that allow the level of uncertainty to be described by the normal variance term
+
+## Why Be Normal? {.centered}
+
+```{r}
+curve(dnorm(x), from=-4, to=4, lwd=2, col='blue2', xlab='',ylab='')
+for (i in -2:2){
+  lines(c(i,i), c(0, dnorm(i)), lwd=2, lty=2, col='gray2')
+}
+arrows(-1,dnorm(-1), 1, dnorm(1), length=.1, code = 3, col='gray2')
+arrows(-2,dnorm(-2), 2, dnorm(2), length=.1, code = 3, col='gray2')
+text(0, dnorm(0.9), "68 %", cex=1.5)
+text(0, dnorm(1.8), "95 %", cex=1.5)
+```
+
+$\mathcal{N}(\mu, \sigma^2) = (2\pi\sigma^2)^{-\frac{1}{2}}\ exp[-\frac{1}{2\sigma^2}(X - \mu)^2]$
+
+## Normal Model with Variance Known {.centered}
+
+Likelihood
+
+$X|\mu, \sigma_0^2 \sim \mathcal{N}(\mu, \sigma_0^2) = (2\pi\sigma_0^2)^{-\frac{1}{2}}\ exp[-\frac{1}{2\sigma_0^2}(X - \mu)^2]$
+
+Prior
+
+$\mu|m, s^2 \sim \mathcal{N}(m, s^2) = (2\pi s^2)^{-\frac{1}{2}}\ exp[-\frac{1}{2s^2}(\mu - m)^2]$
+
+## Normal Model with Variance Known {.centered}
+
+Posterior
+
+$p(\mathrm{x}|\mu)p(\mu) \propto exp[-\frac{1}{2}(\frac{1}{\sigma_0^2}\sum_{i=1}^n(x_i - \mu)^2 + \frac{1}{s^2}(\mu - m)^2)]$
+
+$\propto exp \left[-\frac{1}{2} \left(\frac{1}{s^2} + \frac{n}{\sigma_0^2} \right) \left(\mu - \frac{\left(\frac{m}{s^2} + \frac{n\bar{x}}{\sigma_0^2} \right)}{\left(\frac{1}{s^2} + \frac{n}{\sigma_0^2} \right)} \right)^2 \right]$
+
+
+## Normal Model with Variance Known {.centered}
+
+Posterior mean is:
+
+$\hat{\mu} = \left(\frac{m}{s^2} + \frac{n\bar{x}}{\sigma_0^2} \right) / \left(\frac{1}{s^2} + \frac{n}{\sigma_0^2} \right)$
+
+Posterior variance is:
+
+$\hat{\sigma_{\mu}^2} = \left(\frac{1}{s^2} + \frac{n}{\sigma_0^2} \right)^{-1} = \frac{s^2 \sigma_0^2}{\sigma_0^2 + ns^2}$
+
+
+# Plethora of Priors
+
+## Conjugate priors
+
+- In most of our examples we were using a special type of prior distribution, so called conjugate priors.
+- They have a very special feature: if you multiply likelihood times conjugate prior, you will obtain posterior of the same form as prior
+- *Examples*:
+- Beta prior x binomial likelihood = Beta posterior
+- Normal prior x normal likelihood (mean) = Normal posterior
+- Gamma prior x normal likelihood (variance) = Gamma posterior
+- There are many others, but from my experience, these are three most often used in analyses of psychological data
+
+## Uninformative (reference) priors
+
+- Sometimes when we don't have any prior beliefs regarding the values of the parameters we can use so callled uninformative prior
+- Sometimes it is called reference prior or weakly informative prior
+- The general idea is to use prior that assigns 'equal' probabilities to all values of the parameters
+- If we use uninformative prior we will usually get conclusions similar to the classical (frequentist) approach
+
+## Informative Priors
+
+- previous studies, published work
+- researcher intuition
+- interviewing substantive experts
+- convenience through conjugacy
+- nonparametrics and other data derived sources
+
+## Community of Elicited Priors
+
+- **clinical priors** - substantive experts who are taking part in the research project (easily captured)
+- **skeptical priors** - built with the assumption that the hypothesized effect does not actually exist; overcoming such a prior provides stronger evidence
+- **enthusiastic priors** - opposite of the skeptical priors, assume the existence of the hypothesized effect
+- **reference priors** - they are used as a standard way to deal with some problem, uninformative, 'nonsubjective', occasionally produced by experts but not truely elicited
+
+## V-method
+
+- An expert is asked: what would be an expected value low value as a 0.25 quantile (labeled $x_{0.25}$) and an expected high value as a 0.75 quantile (labeled $x_{0.75}$).
+- These two supplied values, $x_{0.25}$ and $x_{0.75}$, correspond to normal z-scores $z_{0.25}$ = -0.6745 and $z_{0.75}$ = 0.6745, which specify the shape of a normal PDF since there are two equations and two unknowns:
+
+$z_{0.25} = \frac{x_{0.25} - \alpha}{\beta}$
+$z_{0.75} = \frac{x_{0.75} - \alpha}{\beta}$
+
+- Here $\alpha$ and $\beta$ are the mean and standard deviation parameters of the normal PDF
+
+## Elicitation using linear regression
+
+- of course one expert is typically not enough to produce robust prior forms, we can query *J* experts
+- this produces $J \times 2$ equations and only two unknowns
+- we can also ask each expert for more than just two quantiles
+- e.g. each assessor is asked to give values at m = [0.1, 0.25, 0.5, 0.75, 0.99] corresponding to standard normal points $z_m$
+- at this point we can re-express previous equations for the quartile level *m* given by assessor *j*: $x_{jm} = \alpha + \beta z_{jm}$
+- and run a simple linear regression to estimate $\alpha$ as the intercept and $\beta$ as the slope
+
+
