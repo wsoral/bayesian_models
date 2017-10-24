@@ -1,0 +1,62 @@
+---
+title: "Lab 4"
+author: "Wiktor Soral"
+date: "October 24 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Working with R
+
+## R
+
+- free and open-source
+- highly popular both in academia and business
+- powerful, flexible, and capable
+- works on almost every OS, both on desktop computers and in cloud
+- integrates well with other software (e.g. SPSS)
+- **powerful packages for Bayesian analysis (MCMCpack, rjags, rstan)**
+- see plotting capabilities
+
+
+## Steep learning curve
+
+- intimidating for beginners
+- challenging for intermediate users
+- however with proper approach it can be quite fun
+- forget that R is a programming language
+- and think about it as a statistical package (like SPSS)
+
+## Some basic advices
+
+- know where to find the newest version R <a href="https://cran.r-project.org">cran.r-project.org</a>
+- use RStudio <a href="www.rstudio.com">www.rstudio.com</a> - the more advanced you become the more useful it will be
+- know how to find help <a href="www.statmethods.net">www.statmethods.net</a> - read the docs!
+- keep yourself engaged and be a part of the community: <a href="www.r-bloggers.com">www.r-bloggers.com</a>
+
+## How not to loose your mind
+
+- **always** save your code
+- keep your code clear and organized: use comments, indentation, and spacing
+- at least skim through Help pages before running a new function (e.g. ?lm)
+- try do some working examples and understand how they work
+- **do not** save your global environment when exiting R
+- setting your working directory (setwd) might be a good idea (instead of working in a root directory)
+
+
+## Errors happen 
+
+- don't panic - know how to distinguish messages, warnings, and errors
+- carefully read the error message
+- check your syntax, usually it is just a misspelled name, remember that R is case-sensitive (Rstudio **is not** RStudio)*
+- read the docs - check the Usage and Arguments sections
+- try to localize the place that causes the error and see what you can do
+- *google* the error message
+
+
+
+
+

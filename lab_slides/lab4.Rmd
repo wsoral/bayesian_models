@@ -1,0 +1,137 @@
+---
+title: "Lab 4"
+author: "Wiktor Soral"
+date: "October 24 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Working with R
+
+## R
+
+- free and open-source
+- highly popular both in academia and business
+- powerful, flexible, and capable
+- works on almost every OS, both on desktop computers and in cloud
+- integrates well with other software (e.g. SPSS)
+- **powerful packages for Bayesian analysis (MCMCpack, rjags, rstan)**
+
+## R plotting capabilities
+
+```{r}
+y1 <- round(rnorm(n = 36, mean = 7, sd = 2)) # Simulate data from normal distribution
+y2 <- round(rnorm(n = 36, mean = 21, sd = 6))
+y3 <- round(rnorm(n = 36, mean = 50, sd = 8))
+x <- rep(LETTERS[1:12], 3)
+grp <- rep(c("Grp 1", "Grp 2", "Grp 3"), each = 12)
+dat <- data.frame(grp, x, y1, y2, y3)
+
+library(ggplot2)
+# Using default theme
+
+kobe_theme2 <- function() {
+  theme(
+    legend.position = "bottom", legend.title = element_text(family = "Impact", colour = "#552683", size = 10),
+    legend.background = element_rect(fill = "#E2E2E3"),
+    legend.key = element_rect(fill = "#E2E2E3", colour = "#E2E2E3"),
+    legend.text = element_text(family = "Impact", colour = "#E7A922", size = 10),
+    plot.background = element_rect(fill = "#E2E2E3", colour = "#E2E2E3"),
+    panel.background = element_rect(fill = "#E2E2E3"),
+    axis.text = element_text(colour = "#E7A922", family = "Impact"),
+    plot.title = element_text(colour = "#552683", face = "bold", size = 18, vjust = 1, family = "Impact"),
+    axis.title = element_text(colour = "#552683", face = "bold", size = 13, family = "Impact"),
+    panel.grid.major.y = element_line(colour = "#E7A922"),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    strip.text = element_text(family = "Impact", colour = "white"),
+    strip.background = element_rect(fill = "#E7A922"),
+    axis.ticks = element_line(colour = "#E7A922")
+  )
+}
+
+x_id <- rep(12:1, 3) # use this index for reordering the x ticks
+p3 <- ggplot(data = dat, aes(x = reorder(x, rep(1:12, 3)), y = y3, group = factor(grp))) +
+  geom_bar(stat = "identity", fill = "#552683") + coord_polar() + facet_grid(. ~ grp) +
+  ylab("Y LABEL") + xlab("X LABEL") + ggtitle("TITLE OF THE FIGURE")
+p3 + kobe_theme2()
+```
+
+## R plotting capabilities
+
+```{r}
+p2 <- ggplot(data = dat, aes(x = x, y = y2, group = factor(grp))) +
+  geom_line(stat = "identity", aes(linetype = factor(grp)), size = 0.7, colour = "#552683") +
+  ylab("Y LABEL") + xlab("X LABEL") + ggtitle("TITLE OF THE FIGURE")
+p2 + kobe_theme2() + scale_linetype_discrete("GROUP")
+```
+
+## R plotting capabilities
+
+```{r}
+
+
+kobe_theme <- function() {
+  theme(
+    plot.background = element_rect(fill = "#E2E2E3", colour = "#E2E2E3"),
+    panel.background = element_rect(fill = "#E2E2E3"),
+    axis.text = element_text(colour = "#E7A922", family = "Impact"),
+    plot.title = element_text(colour = "#552683", face = "bold", size = 18, vjust = 1, family = "Impact"),
+    axis.title = element_text(colour = "#552683", face = "bold", size = 13, family = "Impact"),
+    panel.grid.major.x = element_line(colour = "#E7A922"),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    strip.text = element_text(family = "Impact", colour = "white"),
+    strip.background = element_rect(fill = "#E7A922"),
+    axis.ticks = element_line(colour = "#E7A922")
+  )
+}
+p1 <- ggplot(data = dat, aes(x = reorder(x, x_id), y = y1)) + geom_bar(stat = "identity", fill = "#552683") +
+  coord_flip() + ylab("Y LABEL") + xlab("X LABEL") + facet_grid(. ~ grp) +
+  ggtitle("TITLE OF THE FIGURE")
+p1 + kobe_theme()
+```
+
+## Steep learning curve
+
+- intimidating for beginners
+- challenging for intermediate users
+- however with proper approach it can be quite fun
+- forget that R is a programming language
+- and think about it as a statistical package (like SPSS)
+
+## Some basic advices
+
+- know where to find the newest version R <a href="https://cran.r-project.org">cran.r-project.org</a>
+- use RStudio <a href="www.rstudio.com">www.rstudio.com</a> - the more advanced you become the more useful it will be
+- know how to find help <a href="www.statmethods.net">www.statmethods.net</a> - read the docs!
+- keep yourself engaged and be a part of the community: <a href="www.r-bloggers.com">www.r-bloggers.com</a>
+
+## How not to loose your mind
+
+- **always** save your code
+- keep your code clear and organized: use comments, indentation, and spacing
+- at least skim through Help pages before running a new function (e.g. ?lm)
+- try do some working examples and understand how they work
+- **do not** save your global environment when exiting R
+- setting your working directory (setwd) might be a good idea (instead of working in a root directory)
+
+
+## Errors happen 
+
+- don't panic - know how to distinguish messages, warnings, and errors
+- carefully read the error message
+- check your syntax, usually it is just a misspelled name, remember that R is case-sensitive (Rstudio **is not** RStudio)*
+- read the docs - check the Usage and Arguments sections
+- try to localize the place that causes the error and see what you can do
+- *google* the error message
+
+
+
+
+
