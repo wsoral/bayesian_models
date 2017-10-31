@@ -1,0 +1,158 @@
+---
+title: "Lab 5"
+author: "Wiktor Soral"
+date: "October 31 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Monte Carlo simulations
+
+## Calculating evidence {.flexbox .vcenter}
+
+$P(\theta | \mathcal{D}) = \frac{P(\mathcal{D} | \theta) \times P(\theta)}{P(\mathcal{D})}$
+
+posterior = likelihood $\times$ prior / evidence
+
+How to calculate evidence?
+
+## Calculating evidence {.flexbox .vcenter}
+
+With only 2 or 3 values of $\theta$ it is fairly simple (recall HW 1):
+
+$P(\mathcal{D}) = [P(\mathcal{D} | \theta = 1) \times P(\theta = 1)] + [P(\mathcal{D} | \theta = 2) \times P(\theta = 2)]$
+
+In general we could write:
+
+$P(\mathcal{D}) = \sum_{\theta} P(\mathcal{D} | \theta) \times P(\theta)$
+
+## Calculating evidence {.flexbox .vcenter}
+
+Though, usually we will use $\theta$ with continuous scale (i.e. infinite number of values).
+
+In math we denote summing across values of continuous scale as **integrating**:
+
+$P(\mathcal{D}) = \int_{\theta} P(\mathcal{D} | \theta) \times P(\theta) \mathrm{d\theta}$
+
+## Calculating integrals - analytical app.
+
+```{r}
+library(ggplot2)
+curve(x^2, from = 0, to=4, lwd=3, col='red', ylab=expression(x^2),
+      main='Integral is a function used to calculate the area below the curve')
+x=c(0,seq(0, 4, length.out = 50), 4, 0)
+y=c(0,seq(0, 4, length.out = 50)^2, 0, 0)
+polygon(x,y, border = 'pink', col=alpha(colour = 'red', alpha = 0.2))
+```
+
+We know from analytical solution: $\int x^2 \mathrm{dx} = \frac{x^3}{3} + const$
+
+## Calculating integrals - numerical app.
+
+```{r}
+bins=9
+xs = seq(0,4, length=bins)[1:(bins-1)]
+step = xs[2] - xs[1]
+curve(x^2, from = 0, to=4, lwd=3, col='red', ylab=expression(x^2),
+      main='Riemann integral (8 bins) - sum of boxes = 17.5')
+rects = c()
+for (i in xs){
+  rect(i, 0, i+step, i^2, border = 'pink', col=alpha(colour = 'red', alpha = 0.2))
+  sRect = step * (i^2)
+  rects = c(rects, sRect)
+}
+```
+
+## Calculating integrals - numerical app.
+
+```{r}
+bins=17
+xs = seq(0,4, length=bins)[1:(bins-1)]
+step = xs[2] - xs[1]
+curve(x^2, from = 0, to=4, lwd=3, col='red', ylab=expression(x^2),
+      main='Riemann integral (16 bins) - sum of boxes = 19.375')
+rects = c()
+for (i in xs){
+  rect(i, 0, i+step, i^2, border = 'pink', col=alpha(colour = 'red', alpha = 0.2))
+  sRect = step * (i^2)
+  rects = c(rects, sRect)
+}
+```
+
+## Calculating integrals - numerical app.
+
+```{r}
+bins=33
+xs = seq(0,4, length=bins)[1:(bins-1)]
+step = xs[2] - xs[1]
+curve(x^2, from = 0, to=4, lwd=3, col='red', ylab=expression(x^2),
+      main='Riemann integral (32 bins) - sum of boxes = 20.343')
+rects = c()
+for (i in xs){
+  rect(i, 0, i+step, i^2, border = 'pink', col=alpha(colour = 'red', alpha = 0.2))
+  sRect = step * (i^2)
+  rects = c(rects, sRect)
+}
+```
+
+## Calculating integrals - numerical app.
+
+```{r}
+bins=65
+xs = seq(0,4, length=bins)[1:(bins-1)]
+step = xs[2] - xs[1]
+curve(x^2, from = 0, to=4, lwd=3, col='red', ylab=expression(x^2),
+      main='Riemann integral (64 bins) - sum of boxes = 20.836')
+rects = c()
+for (i in xs){
+  rect(i, 0, i+step, i^2, border = 'pink', col=alpha(colour = 'red', alpha = 0.2))
+  sRect = step * (i^2)
+  rects = c(rects, sRect)
+}
+```
+
+## Computing integrals - numerical app.
+
+- With 1 parameter/dimension CPU has to perform $100$ operations
+- With 2 parameters/dimensions CPU has to perform $100^2 = 10000$ operations
+- With 3 parameters/dimensions CPU has to perform $100^3 = 1000000$ operations
+
+- With 10 parameters/dimensions CPU has to perform $100^{10} = 100000000000000000000$ operations
+
+- Numerical approach quickly becomes too hard even for fast computers
+
+## Sampling
+
+```{r}
+curve(x^2, from = 0, to=4, lwd=3, col='red', ylim=c(0, 17), ylab=expression(x^2),
+      main='Rejection sampling - pink rect area = 68')
+rect(0, 0, 4, 17, border='pink', lwd=2)
+```
+
+## Sampling
+
+```{r}
+curve(x^2, from = 0, to=4, lwd=3, col='red', ylim=c(0, 17), ylab=expression(x^2),
+      main='Rejection sampling - pink rect area = 68')
+rect(0, 0, 4, 17, border='pink', lwd=2)
+xs = runif(1000, 0, 4)
+ys = runif(1000, 0, 17)
+points(xs, ys, col='pink')
+```
+
+## Sampling
+
+```{r}
+curve(x^2, from = 0, to=4, lwd=3, col='red', ylim=c(0, 17), ylab=expression(x^2),
+      main='Rejection sampling - pink rect area = 68')
+rect(0, 0, 4, 17, border='pink', lwd=2)
+xs_rej = xs[ys <= xs^2]
+ys_rej = ys[ys <= xs^2]
+points(xs, ys, col='pink')
+points(xs_rej, ys_rej, col='pink', pch=16)
+```
+
+E.g. 318 of 1000 sampled points are below the curve - 0.318. $68 \times 0.318 = 21.624$
