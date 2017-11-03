@@ -15,6 +15,6 @@ you feel more comfortable with running your own code in R.
 **a)** your code;
 **b)** output from summary function;
 **c)** plot with posterior distributions;
-**d)** a short description interpretation of the analysis (because in this example all predictors have almost identical variances you can compare importance of unstandardized coefficients and infer which aspect is the most important predictor of the customer satisfaction)
+**d)** a short description interpretation of the analysis (because all predictors in this example have almost identical variances, you can compare importance of unstandardized coefficients and infer which aspect is the most important predictor of the customer satisfaction)
 
 9. **Optional (additional points)** Instead of using raw R script, you can use R Notebooks - see tutorial [here](http://rmarkdown.rstudio.com/r_notebooks.html). R Notebooks are perfect tool for writing fast reports with reproducible analyses.
