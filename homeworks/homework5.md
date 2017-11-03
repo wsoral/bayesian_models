@@ -8,7 +8,7 @@ you feel more comfortable with running your own code in R.
 2. Install package `haven`.
 3. Download file *satisf.sav* and load it to R.
 4. Install package `MCMCpack` and load it.
-5. Create model with MCMCregress function, when you regress variable *overall* on variables: *price*, *numitems*, *org*, *service*, and *quality*. Go to help page and examples if you are not sure how to do this.
+5. Create model with MCMCregress function: regress variable *overall* on variables: *price*, *numitems*, *org*, *service*, and *quality*. Go to help page and examples if you are not sure how to do this.
 6. Install package `bayesplot`.
 7. Plot the saved model with mcmc_areas function. Include posterior of all predictor, i.e. include argument: `pars = c('price', 'numitems', 'org', 'service', 'quality')`. Check examples from lab notebooks if you are not sure how to do this.
 8. In your homework include:
