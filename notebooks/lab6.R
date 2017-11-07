@@ -239,5 +239,7 @@ summary(models)
 ## I.e. the chain traverses parameters space slowly.
 mcmc_acf(models, pars='age')
 
-
+## To check the effective sample size for each parameter use.
+effectiveSize(models)
+## Compare it to your nominal size. As a rule of thumb to obtain 95% credible intervals you should have at least 1000 draws.
 
