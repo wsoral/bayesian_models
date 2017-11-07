@@ -1,0 +1,38 @@
+---
+title: "Lab 6"
+author: "Wiktor Soral"
+date: "November 7 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Markov Chain Monte Carlo
+
+## Monte Carlo basic equation
+
+$E[h(\theta|x)] = \int \pi(\theta|x)h(\theta)d\theta \approx \frac{1}{n} \sum_{i=1}^n h(\theta_i)$
+
+- $\pi(\theta|x)$ is our posterior distribution
+- $h(\theta)$ is some function of the parameter values, e.g. mean, or variance
+- e.g. recall that if you multiply each possible value by probability of it occurence, and then add the products, you obtain arithmetic mean
+- e.g. P(1) = 0.2; P(2) = 0.3; P(3) = 0.3; P(4) = 0.2 and mean of (1, 1, 2, 2, 2, 3, 3, 3, 4, 4) are both equal to 2.5
+
+- instead of integrating we can draw a large sample from $\pi$ and use it approximate integral 
+
+## Issues with standard MC 
+
+- if we know the correct form of the posterior distribution (quite rare), we can just sample from it and evaluate it
+- if we don't know the correct form (usually), we can still use some sampling technique, like rejection sampling
+- however, if we have multi-parameter posterior distribution (frequent), we are little bit stuck
+- it is possible to do rejection sampling, but finding appropriate and efficient bounding distribution in high dimensions is very difficult 
+
+## Markov Chain Monte Carlo
+
+- a solution proposed in the field of physics (among scientist working in Manhattan Project) is Markov Chain Monte Carlo
+- MCMC is used not only on Bayesian analysis, but due to its efficiency and flexibility it is one of the main Bayesian tools
+- the basic idea is to draw a sample of mildly correlated values, and use it to summarize target distribution
+- thus it is the same as in standard MC, but we are working with nonidependent samples
+- it occurs that the problem with nonindepent samples is not so huge, given the potential gains of this alghorithm
