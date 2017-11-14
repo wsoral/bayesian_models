@@ -1,5 +1,6 @@
-# using JAGS
+# Lab 7 - using JAGS
 
+# 1. Basic JAGS workflow
 library(rjags)
 library(LearnBayes)
 library(bayesplot)
@@ -157,6 +158,9 @@ summary(posterior3)
 
 # Posterior plot.
 mcmc_areas(posterior3)
+
+
+# 2. Choosing the best model
 
 # Is model with 2 parameters better than a model with 1 parameter.
 # We draw DIC samples for model 2 and model 3.
