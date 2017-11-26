@@ -1,33 +1,46 @@
 # 1. Bayesian Theorem
 
 We know that:
+
 P( + | suffer ) = 0.95
+
 P( + | non suffer ) = 0.10
+
 P( suffer ) = 0.005
 
+
 This also means that:
+
 P( - | suffer ) = 0.05
+
 P( - | non suffer ) = 0.90
+
 P( non suffer ) = 0.995
+
 
 we want to find P( + ) - probability that the test will be positive
 
-A person can obtain positive result while being sufferer or nor.
+A person can obtain positive result while being sufferer or not.
+
 P( + ) = P( + and suffer ) + P( + and non suffer )
 
 Recall the relation between joint and conditional Ps.
+
 P( + ) = [P( + | suffer ) x P( suffer )] + [P( + | non suffer ) x P( non suffer )]
 
 After substituting known values.
+
 P( + ) = [0.95 x 0.005] + [0.10 x 0.995] = 0.10425
 
 
 b) we want to find P( suffer | + ) - that, given a positive result, the person is a sufferer
 
 We use Bayes theorem
+
 P( suffer | + ) = [P( + | suffer ) x P( suffer )] / P( + )
 
 Because we know P( + ) from previous part we can substitute known values
+
 P( suffer | + ) = [0.95 x 0.005] / 0.10425 = 0.05 (after rounding)
 
 
