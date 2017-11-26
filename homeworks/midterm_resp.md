@@ -47,23 +47,29 @@ P( suffer | + ) = [0.95 x 0.005] / 0.10425 = 0.05 (after rounding)
 c) we want to find P( non suffer | - )
 
 We use Bayes theorem
+
 P( non suffer | - ) = [P( - | non suffer ) x P( non suffer )] / P( - )
 
 If we know P( + ), we can easily calculate P( - )
+
 P( - ) = 1 - P( + ) = 0.89575
 
 Now we, can substitute known values
+
 P( non suffer | - ) = [0.90 x 0.995] / 0.89575 = 0.99972 (after rounding)
 
 c) we want to find P that the person will be misclassified
 
 This means that the test is positive and the person is not sufferer or the test is negative and the person is sufferer
+
 P( miss ) = P( + and non suffer) + P( - and suffer)
 
 Once again, recall the relation between joint and conditional Ps.
+
 P( miss ) = [P( + | non suffer ) x P( non suffer )] + [P( - | suffer ) x P( suffer )]
 
 We can substitute known values
+
 P( miss ) = [0.10 x 0.995] + [0.05 x 0.005] = 0.10 (after rounding)
 
 
@@ -102,11 +108,15 @@ curve(dbeta(x, betaPar1, betaPar2), lwd=2, col='green')
 ## Finding beta posterior
 
 a) find an updated posterior beta distribution
+
 12 people were diagnosed with PTSD
+
 42 people were not diagnosed with PTSD
 
 Posterior beta distribution is then defined by the parameters:
+
 a = 2.15 + 12 = 14.15
+
 b = 16.79 + 42 = 58.79
 
 b) draw a curve of the posterior beta distribution with correct parameters
@@ -141,7 +151,9 @@ If s/he was a Bayesian, s/he would treat data as fixed, but parameters as random
 # 3. Normal-Normal Model with known variance
 
 We now that the mean of IQ is 100, and 95% CI is [95, 105].
+
 This means that prior variance of IQ mean is 2.5.
+
 Therefore IQ ~ N(100, 2.5)
 
 We can plot this with
