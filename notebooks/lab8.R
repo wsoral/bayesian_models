@@ -73,7 +73,11 @@ summary(post0)
 # We will load ptsd.sav - this a dataset from a fake study, where the aim was to examine:
 # How new (1) vs. old (2) method of psychotherapy affects number of daily PTSD intrusions.
 library(ggplot2)
-
+# Loading haven library for reading ptsd.sav dataset.
+# Install haven library for reading SPSS files in R.
+# install.packages("haven")
+library(haven)
+ptsd = read_sav('notebooks/ptsd.sav')
 # First lets try to plot our data, to see what's going on.
 qplot(as.factor(gr), y, data=ptsd, geom='boxplot')
 # There are certain outliers in this dataset.
