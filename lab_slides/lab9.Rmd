@@ -1,0 +1,110 @@
+---
+title: "Lab 9"
+author: "Wiktor Soral"
+date: "December 5th 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Bayes Factor
+
+## Posterior = likelihood x prior... {.flexbox .vcenter}
+
+$P(\theta | \mathcal{D}) = \frac{P(\mathcal{D} | \theta) \times P(\theta)}{P(\mathcal{D})}$
+
+## ...given our model is true {.flexbox .vcenter}
+
+$P(\theta | \mathcal{D, M}) = \frac{P(\mathcal{D} | \theta, \mathcal{M}) \times P(\theta | \mathcal{M})}{P(\mathcal{D| M})}$
+
+where $\mathcal{M}$ = model used to describe data.
+We implicitly assume that our model is true, and thus usually don't include $\mathcal{M}$ in equations.
+
+## Bayesian model comparison {.flexbox .vcenter}
+
+Different models result in different posterior distributions
+
+$P(\theta_1 | \mathcal{D, m1}) = \frac{P(\mathcal{D} | \theta_1, \mathcal{m1}) \times P(\theta_1 | \mathcal{m1})}{P(\mathcal{D | m1})}$
+
+versus
+
+$P(\theta_2 | \mathcal{D, m2}) = \frac{P(\mathcal{D} | \theta_2, \mathcal{m2}) \times P(\theta_2 | \mathcal{m2})}{P(\mathcal{D | m2})}$
+
+## Posterior for a model {.flexbox .vcenter}
+
+We can use Bayes theorem to compute posterior for the model - probability that the model is true given the data.
+
+$P(\mathcal{m1} | \mathcal{D}) = \frac{P(\mathcal{D} | \mathcal{m1}) \times P(\mathcal{m1})}{P(\mathcal{D})}$
+
+and
+
+$P(\mathcal{m2} | \mathcal{D}) = \frac{P(\mathcal{D} | \mathcal{m2}) \times P(\mathcal{m2})}{P(\mathcal{D})}$
+
+## Explicit comparision {.flexbox .vcenter}
+
+With 2 models we can explicitly compare them by using odds of posterior distributions.
+
+$\frac{P(\mathcal{m1} | \mathcal{D})}{P(\mathcal{m2} | \mathcal{D})} = \frac{P(\mathcal{D} | \mathcal{m1})}{P(\mathcal{D} | \mathcal{m2})} \times \frac{P(\mathcal{m1})}{P(\mathcal{m2})}$
+
+posterior odds = ???? x prior odds
+
+## Bayes Factor {.flexbox .vcenter}
+
+$\frac{P(\mathcal{m1} | \mathcal{D})}{P(\mathcal{m2} | \mathcal{D})} = Bayes\ Factor \times \frac{P(\mathcal{m1})}{P(\mathcal{m2})}$
+
+Bayes Factor denotes how much our belief in model 1 in comparison to model 2 increases, by seeing the data. It can be described how much more we favor one model over another.
+
+## Interpreting Bayes Factor
+
+Provided by Jeffreys:
+
+| value          | strength of evidence for model 1 over model 2  |
+|:--------------:|:----------------------------------------------:|
+| less than 1    | negative (supports model 2)                    |
+| 1 to 3.16      | barely worth mentioning                        |
+| 3.16 to 10     | substantial                                    |
+| 10 to 31.62    | strong                                         |
+| 31.62 to 100   | very strong                                    |
+| more than 100  | decisive                                       |
+
+## Interpreting Bayes Factor
+
+Provided by Kass and Raftery:
+
+| value          | strength of evidence for model 1 over model 2  |
+|:--------------:|:----------------------------------------------:|
+| less than 1    | negative (supports model 2)                    |
+| 1 to 3         | not worth more than a bare mention             |
+| 3 to 20        | positive                                       |
+| 20 to 150      | strong                                         |
+| more than 150  | very strong                                    |
+
+
+
+## Calculating Bayes Factor {.flexbox .vcenter}
+
+Computing Bayes Factor is as simple as dividing denominators of Bayes theorem from both models.
+
+$Bayes\ Factor = \frac{\int P(\mathcal{D} | \theta, \mathcal{m1}) \times P(\theta | \mathcal{m1})}{\int P(\mathcal{D} | \theta, \mathcal{m2}) \times P(\theta | \mathcal{m2})}$
+
+Obviously, this is just a joke! Dividing two unknown integrals can be very hard - worse yet MCMC is not very helpful in this case. However there are some approaches to approximate Bayes Factor.
+
+## Pros and cons of Bayes Factor
+
+Pros:
+
+- it is quite intuitive and easy to interpret
+
+- we can measure a strength of evidence for null hypothesis
+
+Cons:
+
+- we have to be very carefull with priors we use - it is SUPERSENSITIVE to our prior assumptions
+
+- there are no noninformative prior distributions
+
+
+
+
