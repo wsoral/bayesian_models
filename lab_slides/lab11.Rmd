@@ -1,0 +1,64 @@
+---
+title: "Lab 11"
+author: "Wiktor Soral"
+date: "December 12th 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Linear regression with multiple predictors
+
+## Working with many dimensions
+
+```{r}
+x <- rnorm(100, 5, 1)
+y <- rnorm(100, 5, 1)
+z <- 2 + 1.5*x + 2.5*y + rnorm(100, 0, 2)
+library(plot3D)
+scatter3D(x,y,z, theta=45, phi=10,col = 'black')
+```
+
+## Working with many dimesions
+
+```{r}
+xs <- seq(min(x),max(x),length.out = 10)
+ys <- seq(min(y),max(y),length.out = 10)
+M <- mesh(xs, ys)
+zs <- 2+1.5*M$x + 2.5*M$y
+scatter3D(x,y,z, theta=45, phi=10,col = 'black')
+surf3D(M$x,M$y, zs,add = T)
+```
+
+## Working with many dimesions
+
+```{r}
+library(ggplot2)
+df <- as.data.frame(cbind(x,y,z))
+suppressWarnings(qplot(x,z,data=df, geom=c('point','smooth'),method='lm'))
+```
+
+## Working with many dimensions
+
+```{r}
+suppressWarnings(qplot(y,z,data=df, geom=c('point','smooth'),method='lm'))
+```
+
+## Bayesian linear model
+
+- $y \sim \mathcal{N}(\mu, \sigma^2)$
+- $\mu = \beta_0 + \sum_k \beta_k * x_k$
+- in other words $y$ is distributed according to Normal distribution with mean $\mu$ and variance $\sigma^2$
+- note that $\mu$ changes (is conditional) on the value of $x_k$
+- where $x_k$ is the $kth$ predictor
+
+## Interactions
+
+- $\mu = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_1x_2$
+- $\mu = (\beta_0 + \beta_1x_1) + (\beta_2 + \beta_3x_1)x_2$
+- $\mu = (\beta_0 + \beta_2x_2) + (\beta_1 + \beta_3x_2)x_1$
+- in other words with interaction term $x_1x_2$ slope of $x_2$ can be represented as conditional on the values of $x_1$
+- similarly slope of $x_1$ can be represented as conditional on the values of $x_2$
+
