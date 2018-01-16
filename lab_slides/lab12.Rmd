@@ -1,0 +1,134 @@
+---
+title: "Lab 12"
+author: "Wiktor Soral"
+date: "January 16th 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Bayesian approach to ANOVA
+
+## Comparing more than 2 groups
+
+```{r}
+library(ggplot2)
+factorA <- gl(4, k = 30, labels = c('l1','l2','l3','l4'))
+dv <- c(rnorm(30, 5), rnorm(30, 8), rnorm(30, 6.5), rnorm(30, 10))
+df <- data.frame(factorA,dv)
+qplot(x = factorA, y = dv, data = df, geom=c('boxplot'))
+```
+
+## Comparing more than 2 groups
+
+```{r}
+qplot(x = factorA, y = dv, data = df, geom=c('point'))+
+  geom_hline(yintercept = mean(dv), size=1, colour='red')+
+  geom_hline(yintercept = tapply(dv, factorA, mean), colour='blue')+
+  ggtitle("Red line = grand mean, blue lines = group means")
+```
+
+
+## Frequentist approach
+
+In classical approach we divide sum of squares (of deflections from means):
+
+$SS_{total} = SS_{between} + SS_{within}$
+
+Recall that, $MSE = \frac{SS}{df}$, both for between and within sum of square:
+
+$F = MSE_{between}/MSE_{within}$
+
+Where F has an F distribution with parameters, $df_{between}$ and $df_{within}$
+
+
+## Means model
+
+$y_{ij} = \mu_j + \epsilon_{ij}$
+
+- we can model $y_{ij}$ as a sum of group mean, $\mu_j$, and within group, individual related noise, $\epsilon_{ij}$
+- we assume that suma of individual errors is, $E(\epsilon_{ij}) = 0$, and, $Var(\epsilon_{ij}) = \sigma^2$
+- the second assumption is known as homogeneity of variances assumption
+
+## Treatments model
+
+- Means model is often of little interest, as $\mu$ includes aspects that are common to all groups and those that are unique (in experimental studies we are usually interested in the latter)
+- Then we can rewrite the models as:
+
+$y_{ij} = \alpha + \beta_j + \epsilon_{ij}$
+
+where $\alpha$ is the baseline level (grand mean) 
+
+and $\beta_j$ are group deflections from baseline level, 
+
+with a constraint that $\sum \beta_j = 0$
+
+## Contrasts
+
+- When we want to make comparisons we have to use contrasts
+- Contrasts are vectors of values of length equal to the number of groups, thant sum up to zero, e.g.:
+$\begin{pmatrix}
+-1 & 1 & 0 & 0
+\end{pmatrix}$
+- Contrasts are multiplied by elements of $\beta_j$, to form values that are used to test hypothses:
+$\begin{pmatrix}
+-1 \times \beta_1 & 1 \times \beta_2 & 0 \times \beta_3 & 0 \times \beta_4
+\end{pmatrix}$
+
+## Contrasts
+
+- Note that since $\beta_j$ and contrast vector have to sum to 0, it is also true for the sum of products of their values when the means of groups of interest are the same. Thus:
+
+$(-1 \times \beta_1) + (1 \times \beta_2) + (0 \times \beta_3) +(0 \times \beta_4) = 0$
+
+$-\beta_1 + \beta_2 = 0$
+
+$\beta_2 = \beta_1$
+
+- And:
+
+$\Psi = (-1 \times \beta_1) + (1 \times \beta_2) + (0 \times \beta_3) +(0 \times \beta_4)$
+
+indicates how much groups of interest differ
+
+## Contrasts - examples
+
+- Comparing 1st to 4th group
+
+$\begin{pmatrix}
+-1 & 0 & 0 & 1
+\end{pmatrix}$
+
+- Comparing 1st to 2nd and 3rd group
+
+$\begin{pmatrix}
+1 & -1/2 & -1/2 & 0
+\end{pmatrix}$
+
+- Comparing 1st and 2nd to 3rd and 4th group
+
+$\begin{pmatrix}
+-1/2 & -1/2 & 1/2 & 1/2
+\end{pmatrix}$
+
+- Comparing 1st group to the rest
+
+$\begin{pmatrix}
+1 & -1/3 & -1/3 & -1/3
+\end{pmatrix}$
+
+## Bayesian omnibus F test?
+
+- In classical approach, we use F test whether there are any differences between group means
+- In Bayesian approach, there is no direct equivalent to omnibus F test
+- We can neglect this fact, as omnibus test is of little information (it cannot tell us which groups are different)
+- We can try model comparison approach as equivalent (next class)
+
+## Multiple comparisons
+
+- In classical approach when making multiple post-hoc comparisons we use some corrections that prevent the inflation of Type I error, e.g. Tukey HSD
+- In Bayesian approach we don't need to do that, as Baysian shrinkage of group means to the grand mean in the hierarchical model accounts for overflow of false differences
+- We should however take care to select appropriate priors
+
