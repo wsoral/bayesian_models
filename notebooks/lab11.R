@@ -195,8 +195,8 @@ qplot(poverty, crime, data= cdata)+
   geom_abline(aes(intercept=beta0+(beta2*lPctMet), slope=beta1+(beta3*lPctMet)), data=random_linesi, size=0.2, col='grey')+
   geom_abline(aes(intercept=beta0+(beta2*hPctMet), slope=beta1+(beta3*hPctMet)), data=random_linesi, size=0.2, col='grey')+
   geom_abline(aes(intercept=beta0+(beta2*mPctMet), slope=beta1+(beta3*mPctMet)), data=means_int, size=0.5, col='red')+
-  geom_abline(aes(intercept=beta0+(beta2*hPctMet), slope=beta1+(beta3*lPctMet)), data=means_int, size=0.5, col='green')+
-  geom_abline(aes(intercept=beta0+(beta2*lPctMet), slope=beta1+(beta3*hPctMet)), data=means_int, size=0.5, col='blue')
+  geom_abline(aes(intercept=beta0+(beta2*lPctMet), slope=beta1+(beta3*lPctMet)), data=means_int, size=0.5, col='green')+
+  geom_abline(aes(intercept=beta0+(beta2*hPctMet), slope=beta1+(beta3*hPctMet)), data=means_int, size=0.5, col='blue')
 
 
 ## to test separate slopes for different levels of pctmetro
