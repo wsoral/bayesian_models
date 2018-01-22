@@ -1,0 +1,135 @@
+---
+title: "Lab 13"
+author: "Wiktor Soral"
+date: "January 23rd 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+```
+
+# Bayesian Analysis of Factorial Desings
+
+## Why factorial designs?
+
+- Say we are interested in how some miracle diet affects weight loss.
+- We are conducting a simple study and compare no diet to miracle diet.
+
+## Why factorial designs?
+
+```{r}
+diet <- gl(2, 10, length = 40, labels = c('no diet', 'miracle diet'))
+workout <- gl(2, 20, labels = c('watching TV', 'best workout'))
+mu <- 3
+tau_diet <- 4
+tau_wout <- 6
+tau_int <- -14
+X <- model.matrix(~diet*workout)
+wl <- X %*% c(mu, tau_diet, tau_wout, tau_int)+rnorm(40,0,1)
+df <- data.frame(diet,workout, wl)
+qplot(diet, wl, data=df, geom='boxplot', xlab='',ylab='Weight loss')
+```
+
+## Why factorial designs?
+
+- Ahh, the miracle diet...What is really important is a proper workout.
+- We should conduct another experiment, should we?
+
+## Why factorial designs?
+
+```{r}
+qplot(workout, wl, data=df, geom='boxplot', xlab='',ylab='Weight loss')
+```
+
+## Why factorial designs?
+
+- If we know in advance important *n* factors responsible for changes in DV, we should rather conduct *n* factorial experiment.
+- E.g. with diet and workout.
+
+## Why factorial designs?
+
+```{r}
+qplot(workout, wl, data=df, geom='boxplot', xlab='',ylab='Weight loss',
+      colour=diet)
+```
+
+## Model for factorial designs
+
+$y_{ijk} = \alpha + \beta_{1j} + \beta_{2k} + \beta_{1\times2jk} + \epsilon_{ijk}$
+
+- $\alpha$ - grand mean
+- $\beta_{1j}$ - effect of factor 1 for level indicated by subscript $j$
+- $\beta_{2k}$ - effect of factor 2 for level indicated by subscript $k$
+- $\beta_{1\times2jk}$ - interactive effect of factors 1 and 2 for their levels indicated by subscripts $j$ and $k$
+- $\epsilon_{ijk}$ - individual level variation for a subject $i$ in groups $j$ of factor 1 and $k$ of factor 2
+
+- we assume that $E(\epsilon_{ijk})$ and $Var(\epsilon_{ijk}) = \sigma^2$, ie. variance does not depend on group membership
+
+## Understanding the model
+
+- Say $\alpha = 4.5$
+
+|             | no diet  | diet  |
+|-------------|----------|-------|
+| watching TV |   4.5    |  4.5  |
+| workout     |   4.5    |  4.5  |
+
+## Understanding the model
+
+- Say $\beta_{1j}$ refers to diet, and is equal to a vector of length equal to the number of levels of diet: (-2, 2)
+
+|             | no diet  | diet  |
+|-------------|----------|-------|
+| watching TV |   2.5    |  6.5  |
+| workout     |   2.5    |  6.5  |
+
+## Understanding the model
+
+- Say $\beta_{2j}$ refers to workout, and is equal to a vector of length equal to the number of levels of workout: (-3, 3)
+
+|             | no diet  | diet  |
+|-------------|----------|-------|
+| watching TV |   1.5    |  1.5  |
+| workout     |   7.5    |  7.5  |
+
+## Understanding the model
+
+- The additive effect of $\beta_{1j}$ and $\beta_{2j}$ is just a combination of previous operations
+
+
+|             | no diet  | diet  |
+|-------------|----------|-------|
+| watching TV |  -0.5    |  3.5  |
+| workout     |   5.5    |  9.5  |
+
+## Understanding the model
+
+- What's left are interaction terms, which are specific to each cell (ie. each combination of factors)
+- Say we have this interaction effects:
+
+
+|             | no diet  | diet  |
+|-------------|----------|-------|
+| watching TV |  -1      |   1   |
+| workout     |   1      |  -1   |
+
+## Understanding the model
+
+- When we add respective cells we will obtain estimated means
+
+|             | no diet  | diet  |
+|-------------|----------|-------|
+| watching TV |  -1.5    |  4.5  |
+| workout     |   6.5    |  8.5  |
+
+## Bayesian factorial model
+
+- The implementation follows the guidelines of Kruschke
+- We assume $y_{ijk} \sim \mathcal{N}(\mu_{jk}, \sigma^2_y)$
+- $\sigma^2_y \sim \mathcal{U}(low,high)$ where low and high indicate values respective to the scale of the DV
+- $\mu_{jk} = \alpha + \beta_{1j} + \beta_{2k} + \beta_{1\times2jk}$
+- $\alpha \sim \mathcal{N}(M, S^2)$ where M and S are mean and multiple of observed DV variance
+- $\beta_{xj} \sim \mathcal{N}( 0.0, \sigma^2_x )$, are deflections related to $x$ (where $x$ is factor 1, 2, or interaction)
+- $\sigma^2_x \sim \mathcal{G}(Shape,Rate)$, are variances/standard deviations of deflections related to $x$ (where $x$ is factor 1, 2, or interaction), and shape and rate are calculated w.r.t. distribution of DV 
