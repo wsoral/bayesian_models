@@ -2,7 +2,8 @@
 title: "Lab 9"
 author: "Wiktor Soral"
 date: "December 5th 2017"
-output: pdf_document
+output:
+  ioslides_presentation
 ---
 
 ```{r setup, include=FALSE}
@@ -26,33 +27,33 @@ We implicitly assume that our model is true, and thus usually don't include $\ma
 
 Different models result in different posterior distributions
 
-$P(\theta_1 | \mathcal{D, m1}) = \frac{P(\mathcal{D} | \theta_1, \mathcal{m1}) \times P(\theta_1 | \mathcal{m1})}{P(\mathcal{D | m1})}$
+$P(\theta_1 | \mathcal{D}, m_1) = \frac{P(\mathcal{D} | \theta_1, m_1) \times P(\theta_1 | m_1)}{P(\mathcal{D} | m_1)}$
 
 versus
 
-$P(\theta_2 | \mathcal{D, m2}) = \frac{P(\mathcal{D} | \theta_2, \mathcal{m2}) \times P(\theta_2 | \mathcal{m2})}{P(\mathcal{D | m2})}$
+$P(\theta_2 | \mathcal{D}, m_2) = \frac{P(\mathcal{D} | \theta_2, m_2) \times P(\theta_2 | m_2)}{P(\mathcal{D} | m_2)}$
 
 ## Posterior for a model {.flexbox .vcenter}
 
 We can use Bayes theorem to compute posterior for the model - probability that the model is true given the data.
 
-$P(\mathcal{m1} | \mathcal{D}) = \frac{P(\mathcal{D} | \mathcal{m1}) \times P(\mathcal{m1})}{P(\mathcal{D})}$
+$P(m_1 | \mathcal{D}) = \frac{P(\mathcal{D} | m_1) \times P(m_1)}{P(\mathcal{D})}$
 
 and
 
-$P(\mathcal{m2} | \mathcal{D}) = \frac{P(\mathcal{D} | \mathcal{m2}) \times P(\mathcal{m2})}{P(\mathcal{D})}$
+$P(m_2 | \mathcal{D}) = \frac{P(\mathcal{D} | m_2) \times P(m_2)}{P(\mathcal{D})}$
 
 ## Explicit comparision {.flexbox .vcenter}
 
 With 2 models we can explicitly compare them by using odds of posterior distributions.
 
-$\frac{P(\mathcal{m1} | \mathcal{D})}{P(\mathcal{m2} | \mathcal{D})} = \frac{P(\mathcal{D} | \mathcal{m1})}{P(\mathcal{D} | \mathcal{m2})} \times \frac{P(\mathcal{m1})}{P(\mathcal{m2})}$
+$\frac{P(m_1 | \mathcal{D})}{P(m_2 | \mathcal{D})} = \frac{P(\mathcal{D} | m_1)}{P(\mathcal{D} | m_2)} \times \frac{P(m_1)}{P(m_2)}$
 
 posterior odds = ???? x prior odds
 
 ## Bayes Factor {.flexbox .vcenter}
 
-$\frac{P(\mathcal{m1} | \mathcal{D})}{P(\mathcal{m2} | \mathcal{D})} = Bayes\ Factor \times \frac{P(\mathcal{m1})}{P(\mathcal{m2})}$
+$\frac{P(m_1 | \mathcal{D})}{P(m_2 | \mathcal{D})} = Bayes\ Factor \times \frac{P(m_1)}{P(m_2)}$
 
 Bayes Factor denotes how much our belief in model 1 in comparison to model 2 increases, by seeing the data. It can be described how much more we favor one model over another.
 
@@ -87,7 +88,7 @@ Provided by Kass and Raftery:
 
 Computing Bayes Factor is as simple as dividing denominators of Bayes theorem from both models.
 
-$Bayes\ Factor = \frac{\int P(\mathcal{D} | \theta, \mathcal{m1}) \times P(\theta | \mathcal{m1})}{\int P(\mathcal{D} | \theta, \mathcal{m2}) \times P(\theta | \mathcal{m2})}$
+$Bayes\ Factor = \frac{\int P(\mathcal{D} | \theta, m_1) \times P(\theta | m_1)}{\int P(\mathcal{D} | \theta, m_2) \times P(\theta | m_2)}$
 
 Obviously, this is just a joke! Dividing two unknown integrals can be very hard - worse yet MCMC is not very helpful in this case. However there are some approaches to approximate Bayes Factor.
 
